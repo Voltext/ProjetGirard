@@ -10,19 +10,43 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href="#">Happy-Toit</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Accueil</a></li>
+                <li><a href="#">Qui sommes-nous</a></li>
+                <li><a href="#">Nos tarifs</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Maisons
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Maisons contemporaines</a></li>
+                        <li><a href="#">Maisons traditionnelles</a></li>
+                        <li><a href="#">Maisons modernes</a></li>
+                        <li><a href="#">Maisons provençales</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Nous contacter</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Connexion</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Mon compte
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Mon profil</a></li>
+                        <li><a href="#">Mes dossiers</a></li>
+                        <hr />
+                        <li><a href="#" style="color: red">Déconnexion</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 

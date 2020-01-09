@@ -1,0 +1,887 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDChantierBricchiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Acces">
+          <Key>
+            <PropertyRef Name="IdAcces" />
+          </Key>
+          <Property Name="IdAcces" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="30" />
+          <Property Name="Mdp" Type="varchar" MaxLength="30" />
+          <Property Name="Statut" Type="varchar" MaxLength="3" />
+          <Property Name="IdPersonnel" Type="int" />
+        </EntityType>
+        <EntityType Name="Aptitudes">
+          <Key>
+            <PropertyRef Name="NumSoustraitant" />
+            <PropertyRef Name="CodeEtape" />
+          </Key>
+          <Property Name="NumSoustraitant" Type="int" Nullable="false" />
+          <Property Name="CodeEtape" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attributions">
+          <Key>
+            <PropertyRef Name="NumDossier" />
+            <PropertyRef Name="CodeEtape" />
+          </Key>
+          <Property Name="NumDossier" Type="int" Nullable="false" />
+          <Property Name="CodeEtape" Type="int" Nullable="false" />
+          <Property Name="NumSoustraitant" Type="int" />
+        </EntityType>
+        <EntityType Name="Candidatures">
+          <Key>
+            <PropertyRef Name="NumDossier" />
+            <PropertyRef Name="CodeEtape" />
+            <PropertyRef Name="NumSoustraitant" />
+          </Key>
+          <Property Name="NumDossier" Type="int" Nullable="false" />
+          <Property Name="CodeEtape" Type="int" Nullable="false" />
+          <Property Name="NumSoustraitant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="NumClient" />
+          </Key>
+          <Property Name="NumClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomClient" Type="char" MaxLength="20" />
+          <Property Name="RueClient" Type="varchar" MaxLength="255" />
+          <Property Name="CodePostal" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Ville" Type="varchar" MaxLength="255" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" />
+          <Property Name="Fax" Type="varchar" MaxLength="20" />
+          <Property Name="Portable" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Compositions">
+          <Key>
+            <PropertyRef Name="NumDossier" />
+            <PropertyRef Name="CodeOperation" />
+          </Key>
+          <Property Name="NumDossier" Type="int" Nullable="false" />
+          <Property Name="CodeOperation" Type="int" Nullable="false" />
+          <Property Name="NbUnite" Type="int" />
+          <Property Name="fini" Type="bit" />
+        </EntityType>
+        <EntityType Name="Dossiers">
+          <Key>
+            <PropertyRef Name="NumDossier" />
+          </Key>
+          <Property Name="NumDossier" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateSignature" Type="smalldatetime" />
+          <Property Name="DateDebut" Type="smalldatetime" />
+          <Property Name="DateFin" Type="smalldatetime" />
+          <Property Name="RueConstruction" Type="varchar" MaxLength="255" />
+          <Property Name="CPConstruction" Type="varchar" MaxLength="255" />
+          <Property Name="VilleConstruction" Type="varchar" MaxLength="255" />
+          <Property Name="CodeParcelle" Type="varchar" MaxLength="255" />
+          <Property Name="NumClient" Type="int" />
+          <Property Name="CoefficientAppliqué" Type="numeric" Precision="3" Scale="2" />
+          <Property Name="IdConducteur" Type="int" />
+        </EntityType>
+        <EntityType Name="Etapes">
+          <Key>
+            <PropertyRef Name="CodeEtape" />
+          </Key>
+          <Property Name="CodeEtape" Type="int" Nullable="false" />
+          <Property Name="Designation" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Operations">
+          <Key>
+            <PropertyRef Name="CodeOperation" />
+          </Key>
+          <Property Name="CodeOperation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Designation" Type="varchar" MaxLength="255" />
+          <Property Name="UniteMesure" Type="varchar" MaxLength="3" />
+          <Property Name="PrixUnitaire" Type="int" />
+          <Property Name="CodeEtape" Type="int" />
+        </EntityType>
+        <EntityType Name="Personnels">
+          <Key>
+            <PropertyRef Name="CodePersonne" />
+          </Key>
+          <Property Name="CodePersonne" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" />
+          <Property Name="Prenom" Type="varchar" MaxLength="30" />
+          <Property Name="AdresseRue" Type="varchar" MaxLength="50" />
+          <Property Name="CodePostal" Type="varchar" MaxLength="5" />
+          <Property Name="Ville" Type="varchar" MaxLength="30" />
+          <Property Name="TeFixe" Type="varchar" MaxLength="10" />
+          <Property Name="Portable" Type="varchar" MaxLength="10" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" />
+          <Property Name="Statut" Type="varchar" MaxLength="3" />
+        </EntityType>
+        <EntityType Name="SousTraitants">
+          <Key>
+            <PropertyRef Name="NumST" />
+          </Key>
+          <Property Name="NumST" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomST" Type="varchar" MaxLength="255" />
+          <Property Name="RueST" Type="varchar" MaxLength="255" />
+          <Property Name="CodePostalST" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="VilleST" Type="varchar" MaxLength="255" />
+          <Property Name="TelephoneST" Type="varchar" MaxLength="20" />
+          <Property Name="FaxST" Type="varchar" MaxLength="20" />
+          <Property Name="PortableST" Type="varchar" MaxLength="20" />
+          <Property Name="EmailST" Type="varchar" MaxLength="150" />
+          <Property Name="NomResponsable" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FKAptitudes1">
+          <End Role="Etapes" Type="Self.Etapes" Multiplicity="1" />
+          <End Role="Aptitudes" Type="Self.Aptitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etapes">
+              <PropertyRef Name="CodeEtape" />
+            </Principal>
+            <Dependent Role="Aptitudes">
+              <PropertyRef Name="CodeEtape" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAptitudes2">
+          <End Role="SousTraitants" Type="Self.SousTraitants" Multiplicity="1" />
+          <End Role="Aptitudes" Type="Self.Aptitudes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SousTraitants">
+              <PropertyRef Name="NumST" />
+            </Principal>
+            <Dependent Role="Aptitudes">
+              <PropertyRef Name="NumSoustraitant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAttribution1">
+          <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="1" />
+          <End Role="Attributions" Type="Self.Attributions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dossiers">
+              <PropertyRef Name="NumDossier" />
+            </Principal>
+            <Dependent Role="Attributions">
+              <PropertyRef Name="NumDossier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAttribution2">
+          <End Role="Etapes" Type="Self.Etapes" Multiplicity="1" />
+          <End Role="Attributions" Type="Self.Attributions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etapes">
+              <PropertyRef Name="CodeEtape" />
+            </Principal>
+            <Dependent Role="Attributions">
+              <PropertyRef Name="CodeEtape" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAttribution3">
+          <End Role="SousTraitants" Type="Self.SousTraitants" Multiplicity="0..1" />
+          <End Role="Attributions" Type="Self.Attributions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SousTraitants">
+              <PropertyRef Name="NumST" />
+            </Principal>
+            <Dependent Role="Attributions">
+              <PropertyRef Name="NumSoustraitant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCandidature1">
+          <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="1" />
+          <End Role="Candidatures" Type="Self.Candidatures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dossiers">
+              <PropertyRef Name="NumDossier" />
+            </Principal>
+            <Dependent Role="Candidatures">
+              <PropertyRef Name="NumDossier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCandidature2">
+          <End Role="Etapes" Type="Self.Etapes" Multiplicity="1" />
+          <End Role="Candidatures" Type="Self.Candidatures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etapes">
+              <PropertyRef Name="CodeEtape" />
+            </Principal>
+            <Dependent Role="Candidatures">
+              <PropertyRef Name="CodeEtape" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCandidature3">
+          <End Role="SousTraitants" Type="Self.SousTraitants" Multiplicity="1" />
+          <End Role="Candidatures" Type="Self.Candidatures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SousTraitants">
+              <PropertyRef Name="NumST" />
+            </Principal>
+            <Dependent Role="Candidatures">
+              <PropertyRef Name="NumSoustraitant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCompositions1">
+          <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="1" />
+          <End Role="Compositions" Type="Self.Compositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dossiers">
+              <PropertyRef Name="NumDossier" />
+            </Principal>
+            <Dependent Role="Compositions">
+              <PropertyRef Name="NumDossier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCompositions2">
+          <End Role="Operations" Type="Self.Operations" Multiplicity="1" />
+          <End Role="Compositions" Type="Self.Compositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operations">
+              <PropertyRef Name="CodeOperation" />
+            </Principal>
+            <Dependent Role="Compositions">
+              <PropertyRef Name="CodeOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKConducteur2">
+          <End Role="Personnels" Type="Self.Personnels" Multiplicity="0..1" />
+          <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnels">
+              <PropertyRef Name="CodePersonne" />
+            </Principal>
+            <Dependent Role="Dossiers">
+              <PropertyRef Name="IdConducteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDossier">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Dossiers" Type="Self.Dossiers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="NumClient" />
+            </Principal>
+            <Dependent Role="Dossiers">
+              <PropertyRef Name="NumClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOperation">
+          <End Role="Etapes" Type="Self.Etapes" Multiplicity="0..1" />
+          <End Role="Operations" Type="Self.Operations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etapes">
+              <PropertyRef Name="CodeEtape" />
+            </Principal>
+            <Dependent Role="Operations">
+              <PropertyRef Name="CodeEtape" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKPersonnel">
+          <End Role="Personnels" Type="Self.Personnels" Multiplicity="0..1" />
+          <End Role="Acces" Type="Self.Acces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnels">
+              <PropertyRef Name="CodePersonne" />
+            </Principal>
+            <Dependent Role="Acces">
+              <PropertyRef Name="IdPersonnel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDChantierBricchiModelStoreContainer">
+          <EntitySet Name="Acces" EntityType="Self.Acces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Aptitudes" EntityType="Self.Aptitudes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attributions" EntityType="Self.Attributions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Candidatures" EntityType="Self.Candidatures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Compositions" EntityType="Self.Compositions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dossiers" EntityType="Self.Dossiers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Etapes" EntityType="Self.Etapes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operations" EntityType="Self.Operations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personnels" EntityType="Self.Personnels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SousTraitants" EntityType="Self.SousTraitants" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FKAptitudes1" Association="Self.FKAptitudes1">
+            <End Role="Etapes" EntitySet="Etapes" />
+            <End Role="Aptitudes" EntitySet="Aptitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FKAptitudes2" Association="Self.FKAptitudes2">
+            <End Role="SousTraitants" EntitySet="SousTraitants" />
+            <End Role="Aptitudes" EntitySet="Aptitudes" />
+          </AssociationSet>
+          <AssociationSet Name="FKAttribution1" Association="Self.FKAttribution1">
+            <End Role="Dossiers" EntitySet="Dossiers" />
+            <End Role="Attributions" EntitySet="Attributions" />
+          </AssociationSet>
+          <AssociationSet Name="FKAttribution2" Association="Self.FKAttribution2">
+            <End Role="Etapes" EntitySet="Etapes" />
+            <End Role="Attributions" EntitySet="Attributions" />
+          </AssociationSet>
+          <AssociationSet Name="FKAttribution3" Association="Self.FKAttribution3">
+            <End Role="SousTraitants" EntitySet="SousTraitants" />
+            <End Role="Attributions" EntitySet="Attributions" />
+          </AssociationSet>
+          <AssociationSet Name="FKCandidature1" Association="Self.FKCandidature1">
+            <End Role="Dossiers" EntitySet="Dossiers" />
+            <End Role="Candidatures" EntitySet="Candidatures" />
+          </AssociationSet>
+          <AssociationSet Name="FKCandidature2" Association="Self.FKCandidature2">
+            <End Role="Etapes" EntitySet="Etapes" />
+            <End Role="Candidatures" EntitySet="Candidatures" />
+          </AssociationSet>
+          <AssociationSet Name="FKCandidature3" Association="Self.FKCandidature3">
+            <End Role="SousTraitants" EntitySet="SousTraitants" />
+            <End Role="Candidatures" EntitySet="Candidatures" />
+          </AssociationSet>
+          <AssociationSet Name="FKCompositions1" Association="Self.FKCompositions1">
+            <End Role="Dossiers" EntitySet="Dossiers" />
+            <End Role="Compositions" EntitySet="Compositions" />
+          </AssociationSet>
+          <AssociationSet Name="FKCompositions2" Association="Self.FKCompositions2">
+            <End Role="Operations" EntitySet="Operations" />
+            <End Role="Compositions" EntitySet="Compositions" />
+          </AssociationSet>
+          <AssociationSet Name="FKConducteur2" Association="Self.FKConducteur2">
+            <End Role="Personnels" EntitySet="Personnels" />
+            <End Role="Dossiers" EntitySet="Dossiers" />
+          </AssociationSet>
+          <AssociationSet Name="FKDossier" Association="Self.FKDossier">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Dossiers" EntitySet="Dossiers" />
+          </AssociationSet>
+          <AssociationSet Name="FKOperation" Association="Self.FKOperation">
+            <End Role="Etapes" EntitySet="Etapes" />
+            <End Role="Operations" EntitySet="Operations" />
+          </AssociationSet>
+          <AssociationSet Name="FKPersonnel" Association="Self.FKPersonnel">
+            <End Role="Personnels" EntitySet="Personnels" />
+            <End Role="Acces" EntitySet="Acces" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDChantierBricchiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Acce">
+          <Key>
+            <PropertyRef Name="IdAcces" />
+          </Key>
+          <Property Name="IdAcces" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Mdp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersonnel" Type="Int32" />
+          <NavigationProperty Name="Personnel" Relationship="Self.FKPersonnel" FromRole="Acces" ToRole="Personnels" />
+        </EntityType>
+        <EntityType Name="Attribution">
+          <Key>
+            <PropertyRef Name="NumDossier" />
+            <PropertyRef Name="CodeEtape" />
+          </Key>
+          <Property Name="NumDossier" Type="Int32" Nullable="false" />
+          <Property Name="CodeEtape" Type="Int32" Nullable="false" />
+          <Property Name="NumSoustraitant" Type="Int32" />
+          <NavigationProperty Name="Dossier" Relationship="Self.FKAttribution1" FromRole="Attributions" ToRole="Dossiers" />
+          <NavigationProperty Name="Etape" Relationship="Self.FKAttribution2" FromRole="Attributions" ToRole="Etapes" />
+          <NavigationProperty Name="SousTraitant" Relationship="Self.FKAttribution3" FromRole="Attributions" ToRole="SousTraitants" />
+        </EntityType>
+        <EntityType Name="Candidature">
+          <Key>
+            <PropertyRef Name="NumDossier" />
+            <PropertyRef Name="CodeEtape" />
+            <PropertyRef Name="NumSoustraitant" />
+          </Key>
+          <Property Name="NumDossier" Type="Int32" Nullable="false" />
+          <Property Name="CodeEtape" Type="Int32" Nullable="false" />
+          <Property Name="NumSoustraitant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dossier" Relationship="Self.FKCandidature1" FromRole="Candidatures" ToRole="Dossiers" />
+          <NavigationProperty Name="Etape" Relationship="Self.FKCandidature2" FromRole="Candidatures" ToRole="Etapes" />
+          <NavigationProperty Name="SousTraitant" Relationship="Self.FKCandidature3" FromRole="Candidatures" ToRole="SousTraitants" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="NumClient" />
+          </Key>
+          <Property Name="NumClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomClient" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="RueClient" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CodePostal" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Ville" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Portable" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Dossiers" Relationship="Self.FKDossier" FromRole="Clients" ToRole="Dossiers" />
+        </EntityType>
+        <EntityType Name="Composition">
+          <Key>
+            <PropertyRef Name="NumDossier" />
+            <PropertyRef Name="CodeOperation" />
+          </Key>
+          <Property Name="NumDossier" Type="Int32" Nullable="false" />
+          <Property Name="CodeOperation" Type="Int32" Nullable="false" />
+          <Property Name="NbUnite" Type="Int32" />
+          <Property Name="fini" Type="Boolean" />
+          <NavigationProperty Name="Dossier" Relationship="Self.FKCompositions1" FromRole="Compositions" ToRole="Dossiers" />
+          <NavigationProperty Name="Operation" Relationship="Self.FKCompositions2" FromRole="Compositions" ToRole="Operations" />
+        </EntityType>
+        <EntityType Name="Dossier">
+          <Key>
+            <PropertyRef Name="NumDossier" />
+          </Key>
+          <Property Name="NumDossier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateSignature" Type="DateTime" Precision="0" />
+          <Property Name="DateDebut" Type="DateTime" Precision="0" />
+          <Property Name="DateFin" Type="DateTime" Precision="0" />
+          <Property Name="RueConstruction" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CPConstruction" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VilleConstruction" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CodeParcelle" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="NumClient" Type="Int32" />
+          <Property Name="CoefficientAppliqué" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="IdConducteur" Type="Int32" />
+          <NavigationProperty Name="Attributions" Relationship="Self.FKAttribution1" FromRole="Dossiers" ToRole="Attributions" />
+          <NavigationProperty Name="Candidatures" Relationship="Self.FKCandidature1" FromRole="Dossiers" ToRole="Candidatures" />
+          <NavigationProperty Name="Client" Relationship="Self.FKDossier" FromRole="Dossiers" ToRole="Clients" />
+          <NavigationProperty Name="Compositions" Relationship="Self.FKCompositions1" FromRole="Dossiers" ToRole="Compositions" />
+          <NavigationProperty Name="Personnel" Relationship="Self.FKConducteur2" FromRole="Dossiers" ToRole="Personnels" />
+        </EntityType>
+        <EntityType Name="Etape">
+          <Key>
+            <PropertyRef Name="CodeEtape" />
+          </Key>
+          <Property Name="CodeEtape" Type="Int32" Nullable="false" />
+          <Property Name="Designation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Attributions" Relationship="Self.FKAttribution2" FromRole="Etapes" ToRole="Attributions" />
+          <NavigationProperty Name="Candidatures" Relationship="Self.FKCandidature2" FromRole="Etapes" ToRole="Candidatures" />
+          <NavigationProperty Name="Operations" Relationship="Self.FKOperation" FromRole="Etapes" ToRole="Operations" />
+          <NavigationProperty Name="SousTraitants" Relationship="Self.Aptitudes" FromRole="Etapes" ToRole="SousTraitants" />
+        </EntityType>
+        <EntityType Name="Operation">
+          <Key>
+            <PropertyRef Name="CodeOperation" />
+          </Key>
+          <Property Name="CodeOperation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Designation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UniteMesure" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PrixUnitaire" Type="Int32" />
+          <Property Name="CodeEtape" Type="Int32" />
+          <NavigationProperty Name="Compositions" Relationship="Self.FKCompositions2" FromRole="Operations" ToRole="Compositions" />
+          <NavigationProperty Name="Etape" Relationship="Self.FKOperation" FromRole="Operations" ToRole="Etapes" />
+        </EntityType>
+        <EntityType Name="Personnel">
+          <Key>
+            <PropertyRef Name="CodePersonne" />
+          </Key>
+          <Property Name="CodePersonne" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="AdresseRue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodePostal" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Ville" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TeFixe" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Portable" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Statut" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Acces" Relationship="Self.FKPersonnel" FromRole="Personnels" ToRole="Acces" />
+          <NavigationProperty Name="Dossiers" Relationship="Self.FKConducteur2" FromRole="Personnels" ToRole="Dossiers" />
+        </EntityType>
+        <EntityType Name="SousTraitant">
+          <Key>
+            <PropertyRef Name="NumST" />
+          </Key>
+          <Property Name="NumST" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomST" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RueST" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CodePostalST" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="VilleST" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TelephoneST" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FaxST" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PortableST" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmailST" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="NomResponsable" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Attributions" Relationship="Self.FKAttribution3" FromRole="SousTraitants" ToRole="Attributions" />
+          <NavigationProperty Name="Candidatures" Relationship="Self.FKCandidature3" FromRole="SousTraitants" ToRole="Candidatures" />
+          <NavigationProperty Name="Etapes" Relationship="Self.Aptitudes" FromRole="SousTraitants" ToRole="Etapes" />
+        </EntityType>
+        <Association Name="FKPersonnel">
+          <End Role="Personnels" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="Acces" Type="Self.Acce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnels">
+              <PropertyRef Name="CodePersonne" />
+            </Principal>
+            <Dependent Role="Acces">
+              <PropertyRef Name="IdPersonnel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAttribution1">
+          <End Role="Dossiers" Type="Self.Dossier" Multiplicity="1" />
+          <End Role="Attributions" Type="Self.Attribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dossiers">
+              <PropertyRef Name="NumDossier" />
+            </Principal>
+            <Dependent Role="Attributions">
+              <PropertyRef Name="NumDossier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAttribution2">
+          <End Role="Etapes" Type="Self.Etape" Multiplicity="1" />
+          <End Role="Attributions" Type="Self.Attribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etapes">
+              <PropertyRef Name="CodeEtape" />
+            </Principal>
+            <Dependent Role="Attributions">
+              <PropertyRef Name="CodeEtape" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAttribution3">
+          <End Role="SousTraitants" Type="Self.SousTraitant" Multiplicity="0..1" />
+          <End Role="Attributions" Type="Self.Attribution" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SousTraitants">
+              <PropertyRef Name="NumST" />
+            </Principal>
+            <Dependent Role="Attributions">
+              <PropertyRef Name="NumSoustraitant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCandidature1">
+          <End Role="Dossiers" Type="Self.Dossier" Multiplicity="1" />
+          <End Role="Candidatures" Type="Self.Candidature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dossiers">
+              <PropertyRef Name="NumDossier" />
+            </Principal>
+            <Dependent Role="Candidatures">
+              <PropertyRef Name="NumDossier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCandidature2">
+          <End Role="Etapes" Type="Self.Etape" Multiplicity="1" />
+          <End Role="Candidatures" Type="Self.Candidature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etapes">
+              <PropertyRef Name="CodeEtape" />
+            </Principal>
+            <Dependent Role="Candidatures">
+              <PropertyRef Name="CodeEtape" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCandidature3">
+          <End Role="SousTraitants" Type="Self.SousTraitant" Multiplicity="1" />
+          <End Role="Candidatures" Type="Self.Candidature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SousTraitants">
+              <PropertyRef Name="NumST" />
+            </Principal>
+            <Dependent Role="Candidatures">
+              <PropertyRef Name="NumSoustraitant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKDossier">
+          <End Role="Clients" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Dossiers" Type="Self.Dossier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="NumClient" />
+            </Principal>
+            <Dependent Role="Dossiers">
+              <PropertyRef Name="NumClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCompositions1">
+          <End Role="Dossiers" Type="Self.Dossier" Multiplicity="1" />
+          <End Role="Compositions" Type="Self.Composition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dossiers">
+              <PropertyRef Name="NumDossier" />
+            </Principal>
+            <Dependent Role="Compositions">
+              <PropertyRef Name="NumDossier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKCompositions2">
+          <End Role="Operations" Type="Self.Operation" Multiplicity="1" />
+          <End Role="Compositions" Type="Self.Composition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operations">
+              <PropertyRef Name="CodeOperation" />
+            </Principal>
+            <Dependent Role="Compositions">
+              <PropertyRef Name="CodeOperation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKConducteur2">
+          <End Role="Personnels" Type="Self.Personnel" Multiplicity="0..1" />
+          <End Role="Dossiers" Type="Self.Dossier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personnels">
+              <PropertyRef Name="CodePersonne" />
+            </Principal>
+            <Dependent Role="Dossiers">
+              <PropertyRef Name="IdConducteur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKOperation">
+          <End Role="Etapes" Type="Self.Etape" Multiplicity="0..1" />
+          <End Role="Operations" Type="Self.Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etapes">
+              <PropertyRef Name="CodeEtape" />
+            </Principal>
+            <Dependent Role="Operations">
+              <PropertyRef Name="CodeEtape" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Aptitudes">
+          <End Role="Etapes" Type="Self.Etape" Multiplicity="*" />
+          <End Role="SousTraitants" Type="Self.SousTraitant" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BDChantierBricchiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Acces" EntityType="Self.Acce" />
+          <EntitySet Name="Attributions" EntityType="Self.Attribution" />
+          <EntitySet Name="Candidatures" EntityType="Self.Candidature" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Compositions" EntityType="Self.Composition" />
+          <EntitySet Name="Dossiers" EntityType="Self.Dossier" />
+          <EntitySet Name="Etapes" EntityType="Self.Etape" />
+          <EntitySet Name="Operations" EntityType="Self.Operation" />
+          <EntitySet Name="Personnels" EntityType="Self.Personnel" />
+          <EntitySet Name="SousTraitants" EntityType="Self.SousTraitant" />
+          <AssociationSet Name="FKPersonnel" Association="Self.FKPersonnel">
+            <End Role="Personnels" EntitySet="Personnels" />
+            <End Role="Acces" EntitySet="Acces" />
+          </AssociationSet>
+          <AssociationSet Name="FKAttribution1" Association="Self.FKAttribution1">
+            <End Role="Dossiers" EntitySet="Dossiers" />
+            <End Role="Attributions" EntitySet="Attributions" />
+          </AssociationSet>
+          <AssociationSet Name="FKAttribution2" Association="Self.FKAttribution2">
+            <End Role="Etapes" EntitySet="Etapes" />
+            <End Role="Attributions" EntitySet="Attributions" />
+          </AssociationSet>
+          <AssociationSet Name="FKAttribution3" Association="Self.FKAttribution3">
+            <End Role="SousTraitants" EntitySet="SousTraitants" />
+            <End Role="Attributions" EntitySet="Attributions" />
+          </AssociationSet>
+          <AssociationSet Name="FKCandidature1" Association="Self.FKCandidature1">
+            <End Role="Dossiers" EntitySet="Dossiers" />
+            <End Role="Candidatures" EntitySet="Candidatures" />
+          </AssociationSet>
+          <AssociationSet Name="FKCandidature2" Association="Self.FKCandidature2">
+            <End Role="Etapes" EntitySet="Etapes" />
+            <End Role="Candidatures" EntitySet="Candidatures" />
+          </AssociationSet>
+          <AssociationSet Name="FKCandidature3" Association="Self.FKCandidature3">
+            <End Role="SousTraitants" EntitySet="SousTraitants" />
+            <End Role="Candidatures" EntitySet="Candidatures" />
+          </AssociationSet>
+          <AssociationSet Name="FKDossier" Association="Self.FKDossier">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Dossiers" EntitySet="Dossiers" />
+          </AssociationSet>
+          <AssociationSet Name="FKCompositions1" Association="Self.FKCompositions1">
+            <End Role="Dossiers" EntitySet="Dossiers" />
+            <End Role="Compositions" EntitySet="Compositions" />
+          </AssociationSet>
+          <AssociationSet Name="FKCompositions2" Association="Self.FKCompositions2">
+            <End Role="Operations" EntitySet="Operations" />
+            <End Role="Compositions" EntitySet="Compositions" />
+          </AssociationSet>
+          <AssociationSet Name="FKConducteur2" Association="Self.FKConducteur2">
+            <End Role="Personnels" EntitySet="Personnels" />
+            <End Role="Dossiers" EntitySet="Dossiers" />
+          </AssociationSet>
+          <AssociationSet Name="FKOperation" Association="Self.FKOperation">
+            <End Role="Etapes" EntitySet="Etapes" />
+            <End Role="Operations" EntitySet="Operations" />
+          </AssociationSet>
+          <AssociationSet Name="Aptitudes" Association="Self.Aptitudes">
+            <End Role="Etapes" EntitySet="Etapes" />
+            <End Role="SousTraitants" EntitySet="SousTraitants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDChantierBricchiModelStoreContainer" CdmEntityContainer="BDChantierBricchiEntities">
+          <EntitySetMapping Name="Acces">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.Acce">
+              <MappingFragment StoreEntitySet="Acces">
+                <ScalarProperty Name="IdAcces" ColumnName="IdAcces" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Mdp" ColumnName="Mdp" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+                <ScalarProperty Name="IdPersonnel" ColumnName="IdPersonnel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attributions">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.Attribution">
+              <MappingFragment StoreEntitySet="Attributions">
+                <ScalarProperty Name="NumDossier" ColumnName="NumDossier" />
+                <ScalarProperty Name="CodeEtape" ColumnName="CodeEtape" />
+                <ScalarProperty Name="NumSoustraitant" ColumnName="NumSoustraitant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidatures">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.Candidature">
+              <MappingFragment StoreEntitySet="Candidatures">
+                <ScalarProperty Name="NumDossier" ColumnName="NumDossier" />
+                <ScalarProperty Name="CodeEtape" ColumnName="CodeEtape" />
+                <ScalarProperty Name="NumSoustraitant" ColumnName="NumSoustraitant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="NumClient" ColumnName="NumClient" />
+                <ScalarProperty Name="NomClient" ColumnName="NomClient" />
+                <ScalarProperty Name="RueClient" ColumnName="RueClient" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Portable" ColumnName="Portable" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compositions">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.Composition">
+              <MappingFragment StoreEntitySet="Compositions">
+                <ScalarProperty Name="NumDossier" ColumnName="NumDossier" />
+                <ScalarProperty Name="CodeOperation" ColumnName="CodeOperation" />
+                <ScalarProperty Name="NbUnite" ColumnName="NbUnite" />
+                <ScalarProperty Name="fini" ColumnName="fini" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dossiers">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.Dossier">
+              <MappingFragment StoreEntitySet="Dossiers">
+                <ScalarProperty Name="NumDossier" ColumnName="NumDossier" />
+                <ScalarProperty Name="DateSignature" ColumnName="DateSignature" />
+                <ScalarProperty Name="DateDebut" ColumnName="DateDebut" />
+                <ScalarProperty Name="DateFin" ColumnName="DateFin" />
+                <ScalarProperty Name="RueConstruction" ColumnName="RueConstruction" />
+                <ScalarProperty Name="CPConstruction" ColumnName="CPConstruction" />
+                <ScalarProperty Name="VilleConstruction" ColumnName="VilleConstruction" />
+                <ScalarProperty Name="CodeParcelle" ColumnName="CodeParcelle" />
+                <ScalarProperty Name="NumClient" ColumnName="NumClient" />
+                <ScalarProperty Name="CoefficientAppliqué" ColumnName="CoefficientAppliqué" />
+                <ScalarProperty Name="IdConducteur" ColumnName="IdConducteur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Etapes">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.Etape">
+              <MappingFragment StoreEntitySet="Etapes">
+                <ScalarProperty Name="CodeEtape" ColumnName="CodeEtape" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operations">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.Operation">
+              <MappingFragment StoreEntitySet="Operations">
+                <ScalarProperty Name="CodeOperation" ColumnName="CodeOperation" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="UniteMesure" ColumnName="UniteMesure" />
+                <ScalarProperty Name="PrixUnitaire" ColumnName="PrixUnitaire" />
+                <ScalarProperty Name="CodeEtape" ColumnName="CodeEtape" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personnels">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.Personnel">
+              <MappingFragment StoreEntitySet="Personnels">
+                <ScalarProperty Name="CodePersonne" ColumnName="CodePersonne" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="AdresseRue" ColumnName="AdresseRue" />
+                <ScalarProperty Name="CodePostal" ColumnName="CodePostal" />
+                <ScalarProperty Name="Ville" ColumnName="Ville" />
+                <ScalarProperty Name="TeFixe" ColumnName="TeFixe" />
+                <ScalarProperty Name="Portable" ColumnName="Portable" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Statut" ColumnName="Statut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SousTraitants">
+            <EntityTypeMapping TypeName="BDChantierBricchiModel.SousTraitant">
+              <MappingFragment StoreEntitySet="SousTraitants">
+                <ScalarProperty Name="NumST" ColumnName="NumST" />
+                <ScalarProperty Name="NomST" ColumnName="NomST" />
+                <ScalarProperty Name="RueST" ColumnName="RueST" />
+                <ScalarProperty Name="CodePostalST" ColumnName="CodePostalST" />
+                <ScalarProperty Name="VilleST" ColumnName="VilleST" />
+                <ScalarProperty Name="TelephoneST" ColumnName="TelephoneST" />
+                <ScalarProperty Name="FaxST" ColumnName="FaxST" />
+                <ScalarProperty Name="PortableST" ColumnName="PortableST" />
+                <ScalarProperty Name="EmailST" ColumnName="EmailST" />
+                <ScalarProperty Name="NomResponsable" ColumnName="NomResponsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Aptitudes" TypeName="BDChantierBricchiModel.Aptitudes" StoreEntitySet="Aptitudes">
+            <EndProperty Name="Etapes">
+              <ScalarProperty Name="CodeEtape" ColumnName="CodeEtape" />
+            </EndProperty>
+            <EndProperty Name="SousTraitants">
+              <ScalarProperty Name="NumST" ColumnName="NumSoustraitant" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

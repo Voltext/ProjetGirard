@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="34bf5d0586d74f6ca1ab22725a171b2d" Name="Diagram1">
+        <EntityTypeShape EntityType="BDChantierBricchiModel.Acce" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDChantierBricchiModel.Attribution" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDChantierBricchiModel.Candidature" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDChantierBricchiModel.Client" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDChantierBricchiModel.Composition" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDChantierBricchiModel.Dossier" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDChantierBricchiModel.Etape" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDChantierBricchiModel.Operation" Width="1.5" PointX="6" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDChantierBricchiModel.Personnel" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDChantierBricchiModel.SousTraitant" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKPersonnel" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKAttribution1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKAttribution2" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKAttribution3" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKCandidature1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKCandidature2" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKCandidature3" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKDossier" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKCompositions1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKCompositions2" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKConducteur2" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.FKOperation" ManuallyRouted="false" />
+        <AssociationConnector Association="BDChantierBricchiModel.Aptitudes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
